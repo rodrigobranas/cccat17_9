@@ -17,6 +17,24 @@ services:
       - "5433:5432"
     volumes:
       - ./backend/ride/create.sql:/docker-entrypoint-initdb.d/init.sql
+  postgres_payment:
+    image: postgres:14.3-alpine
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: app
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./backend/payment/create.sql:/docker-entrypoint-initdb.d/init.sql
+  postgres_query:
+    image: postgres:14.3-alpine
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: app
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./backend/query/create.sql:/docker-entrypoint-initdb.d/init.sql
   rabbitmq:
     image: rabbitmq:3-management
     ports:

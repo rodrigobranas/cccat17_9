@@ -1,3 +1,4 @@
+import { RabbitMQAdapter } from "../../../infra/queue/Queue";
 import AccountGateway from "../../gateway/AccountGateway";
 import RideRepository from "../../repository/RideRepository";
 import UseCase from "../UseCase";
@@ -14,6 +15,10 @@ export default class AcceptRide implements UseCase {
 		const ride = await this.rideRepository.getRideById(input.rideId);
 		ride.accept(account);
 		await this.rideRepository.updateRide(ride);
+		const queue = new RabbitMQAdapter();
+		await queue.connect();
+		await queue.setup("rideAccepted", "");
+		await queue.publish("rideAccepted", { rideId: ride.rideId, driverName: account.name });
 	}
 
 }

@@ -66,6 +66,7 @@ test("Deve finalizar uma corrida", async function () {
 		toLong: -48.522234807851476
 	}
 	const outputRequestRide = await requestRide.execute(inputRequestRide);
+	console.log(outputRequestRide.rideId);
 	const inputSignupDriver = {
 		name: "John Doe",
 		email: `john.doe${Math.random()}@gmail.com`,

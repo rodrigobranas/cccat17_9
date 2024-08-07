@@ -7,7 +7,7 @@ axios.defaults.validateStatus = function () {
 test("Deve criar uma conta de passageiro pela api", async function () {
 	const inputSignup = {
 		name: "John Doe",
-		email: `john.doe${Math.random()}@gmail.com`,
+		email: `john.doe.sync${Math.random()}@gmail.com`,
 		cpf: "97456321558",
 		isPassenger: true
 	}
@@ -32,4 +32,14 @@ test("Não deve criar uma conta de passageiro com cpf inválido pela api", async
 	const outputSignup = responseSignup.data;
 	expect(responseSignup.status).toBe(422);
 	expect(outputSignup.message).toBe("Invalid cpf");
+});
+
+test.only("Deve criar uma conta de passageiro pela api async", async function () {
+	const inputSignup = {
+		name: "John Doe",
+		email: `john.doe.async${Math.random()}@gmail.com`,
+		cpf: "97456321558",
+		isPassenger: true
+	}
+	await axios.post("http://localhost:3001/signup_async", inputSignup);
 });
