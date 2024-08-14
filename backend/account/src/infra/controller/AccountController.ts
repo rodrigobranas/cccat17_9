@@ -17,6 +17,7 @@ export default class AccountController {
 	constructor () {
 		this.httpServer.register("post", "/signup", async (params: any, body: any) => {
 			const input = body;
+			console.log("signup", input);
 			const output = await this.signup.execute(input);
 			return output;
 		});

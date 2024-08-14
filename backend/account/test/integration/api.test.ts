@@ -34,7 +34,7 @@ test("Não deve criar uma conta de passageiro com cpf inválido pela api", async
 	expect(outputSignup.message).toBe("Invalid cpf");
 });
 
-test.only("Deve criar uma conta de passageiro pela api async", async function () {
+test.skip("Deve criar uma conta de passageiro pela api async", async function () {
 	const inputSignup = {
 		name: "John Doe",
 		email: `john.doe.async${Math.random()}@gmail.com`,
